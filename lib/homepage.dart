@@ -129,21 +129,38 @@ class _DynamicIslandSnackBarState extends State<DynamicIslandSnackBar>
           builder: (context, child) {
             return Align(
               alignment: Alignment.topCenter,
-              child: Container(
-                width: _widthAnimation.value,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                margin: const EdgeInsets.only(top: 20),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  widget.message,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
+              child: Padding(
+                padding: const EdgeInsets.all(6),
+                child: Container(
+                  width: _widthAnimation.value,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  margin: const EdgeInsets.only(top: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Text(
+                    'Hello, Flutter!',
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.normal,
+                      fontStyle: FontStyle.normal,
+                      letterSpacing: 0.0,
+                      wordSpacing: 0.0,
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      backgroundColor: null,
+                      decoration: TextDecoration.none,
+                      decorationColor: Colors.white,
+                      decorationStyle: TextDecorationStyle.solid,
+                      shadows: [],
+                      overflow: TextOverflow.clip,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    textDirection: TextDirection.ltr,
+                    softWrap: true,
+                    // textScaler: 1.0,
                   ),
                 ),
               ),
