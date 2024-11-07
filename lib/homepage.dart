@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class Homepage extends StatefulWidget {
@@ -41,32 +43,6 @@ class _HomepageState extends State<Homepage> {
       overlayEntry.remove();
     });
   }
-
-  // void showSnackbar(BuildContext context) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       content: Container(
-  //         width: 300,
-  //         height: 100,
-  //         decoration: BoxDecoration(color: Colors.amber),
-  //         child: Text('data'),
-  //       ),
-  //       backgroundColor: Colors.transparent,
-  //       elevation: 0,
-  //       duration: const Duration(seconds: 3),
-  //       action: SnackBarAction(
-  //         label: 'Undo',
-  //         textColor: Colors.yellow,
-  //         onPressed: () {
-  //           // Code to execute when 'Undo' is tapped
-  //         },
-  //       ),
-  //     ),
-  //     snackBarAnimationStyle: AnimationStyle(
-  //       curve: Curves.easeInCirc,
-  //     ),
-  //   );
-  // }
 }
 
 class DynamicIslandSnackBar extends StatefulWidget {
@@ -94,7 +70,7 @@ class _DynamicIslandSnackBarState extends State<DynamicIslandSnackBar>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 400),
     );
 
     _widthAnimation = Tween<double>(begin: 0, end: 450).animate(
@@ -130,37 +106,48 @@ class _DynamicIslandSnackBarState extends State<DynamicIslandSnackBar>
             return Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                padding: const EdgeInsets.all(6),
-                child: Container(
-                  width: _widthAnimation.value,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  margin: const EdgeInsets.only(top: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(20),
+                padding: const EdgeInsets.only(left: 6, top: 40, right: 6),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: _widthAnimation
+                        .value, // Control the max width of the snackbar
                   ),
-                  child: const Text(
-                    'Hello, Flutter!',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.normal,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: 0.0,
-                      wordSpacing: 0.0,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      backgroundColor: null,
-                      decoration: TextDecoration.none,
-                      decorationColor: Colors.white,
-                      decorationStyle: TextDecorationStyle.solid,
-                      shadows: [],
-                      overflow: TextOverflow.clip,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                      child: Container(
+                        width: _widthAnimation.value,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 33, 255, 4)
+                              .withOpacity(.4),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Text(
+                          'Hello, Flutter!',
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.normal,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.0,
+                            wordSpacing: 0.0,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            backgroundColor: null,
+                            decoration: TextDecoration.none,
+                            decorationColor: Colors.white,
+                            decorationStyle: TextDecorationStyle.solid,
+                            shadows: [],
+                            overflow: TextOverflow.clip,
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          textDirection: TextDirection.ltr,
+                          softWrap: true,
+                        ),
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    textDirection: TextDirection.ltr,
-                    softWrap: true,
-                    // textScaler: 1.0,
                   ),
                 ),
               ),
