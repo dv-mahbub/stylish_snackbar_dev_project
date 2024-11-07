@@ -48,11 +48,13 @@ class _HomepageState extends State<Homepage> {
 class DynamicIslandSnackBar extends StatefulWidget {
   final String message;
   final Duration duration;
+  final TextStyle? textStyle;
 
   const DynamicIslandSnackBar({
     super.key,
     required this.message,
     this.duration = const Duration(seconds: 3),
+    this.textStyle,
   });
 
   @override
@@ -97,6 +99,34 @@ class _DynamicIslandSnackBarState extends State<DynamicIslandSnackBar>
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle = widget.textStyle?.copyWith(
+          fontSize: widget.textStyle?.fontSize ?? 14.0,
+          fontWeight: widget.textStyle?.fontWeight ?? FontWeight.normal,
+          letterSpacing: widget.textStyle?.letterSpacing ?? 0.0,
+          wordSpacing: widget.textStyle?.wordSpacing ?? 0.0,
+          color: widget.textStyle?.color ?? Colors.black,
+          backgroundColor: widget.textStyle?.backgroundColor,
+          decoration: widget.textStyle?.decoration ?? TextDecoration.none,
+          decorationColor: widget.textStyle?.decorationColor ?? Colors.white,
+          decorationStyle:
+              widget.textStyle?.decorationStyle ?? TextDecorationStyle.solid,
+          shadows: widget.textStyle?.shadows ?? [],
+          overflow: widget.textStyle?.overflow ?? TextOverflow.clip,
+        ) ??
+        const TextStyle(
+          fontSize: 14.0,
+          fontWeight: FontWeight.normal,
+          fontStyle: FontStyle.normal,
+          letterSpacing: 0.0,
+          wordSpacing: 0.0,
+          color: Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: null,
+          decoration: TextDecoration.none,
+          decorationColor: Colors.white,
+          decorationStyle: TextDecorationStyle.solid,
+          shadows: [],
+          overflow: TextOverflow.clip,
+        );
     return SafeArea(
       child: FadeTransition(
         opacity: _opacityAnimation,
@@ -125,22 +155,9 @@ class _DynamicIslandSnackBarState extends State<DynamicIslandSnackBar>
                               .withOpacity(.4),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Hello, Flutter!',
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.normal,
-                            fontStyle: FontStyle.normal,
-                            letterSpacing: 0.0,
-                            wordSpacing: 0.0,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            backgroundColor: null,
-                            decoration: TextDecoration.none,
-                            decorationColor: Colors.white,
-                            decorationStyle: TextDecorationStyle.solid,
-                            shadows: [],
-                            overflow: TextOverflow.clip,
-                          ),
+                          style: textStyle,
                           textAlign: TextAlign.center,
                           maxLines: 1,
                           textDirection: TextDirection.ltr,
